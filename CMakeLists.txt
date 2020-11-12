@@ -24,8 +24,12 @@ if(ENABLE_STATIC)
     install(TARGETS "cnpy-static" ARCHIVE DESTINATION lib)
 endif(ENABLE_STATIC)
 
+# Warning suppresions
+if(MSVC)
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+  add_definitions(-D_CONSOLE -DWIN64 -D_CRT_SECURE_NO_WARNINGS -DNOMINMAX)
+endif()
+
 install(FILES "cnpy.h" DESTINATION include)
 install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-
-add_executable(example1 example1.cpp)
-target_link_libraries(example1 cnpy)
