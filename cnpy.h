@@ -248,7 +248,7 @@ namespace cnpy {
         if(shape.size() == 1) dict += ",";
         dict += "), }";
         //pad with spaces so that preamble+dict is modulo 16 bytes. preamble is 10 bytes. dict needs to end with \n
-        int remainder = 16 - (10 + dict.size()) % 16;
+        int remainder = 16 - (10 + static_cast<int>(dict.size())) % 16;
         dict.insert(dict.end(),remainder,' ');
         dict.back() = '\n';
 
