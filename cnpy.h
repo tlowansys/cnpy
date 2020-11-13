@@ -249,7 +249,7 @@ namespace cnpy {
         dict += "), }";
         //pad with spaces so that preamble+dict is modulo 16 bytes. preamble is 10 bytes. dict needs to end with \n
         int remainder = 16 - (10 + static_cast<int>(dict.size())) % 16;
-        dict.insert(dict.end(),remainder,' ');
+        dict.insert(dict.end(),static_cast<size_type>(remainder),' ');
         dict.back() = '\n';
 
         std::vector<char> header;
