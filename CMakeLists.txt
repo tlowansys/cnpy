@@ -5,8 +5,6 @@ endif(COMMAND cmake_policy)
 
 project(CNPY)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
 option(ENABLE_STATIC "Build static (.a) library" ON)
 
 find_package(ZLIB REQUIRED)
@@ -29,6 +27,8 @@ if(MSVC)
   set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
   add_definitions(-D_CONSOLE -DWIN64 -D_CRT_SECURE_NO_WARNINGS -DNOMINMAX)
+elseif(UNIX)
+  target_compile_options(cnpy PRIVATE)
 endif()
 
 install(FILES "cnpy.h" DESTINATION include)
