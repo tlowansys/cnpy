@@ -140,7 +140,6 @@ namespace cnpy {
         uint16_t nrecs = 0;
         size_t global_header_offset = 0;
         std::vector<char> global_header;
-71
         if(mode == "a") fp = fopen(zipname.c_str(),"r+b");
 
         if(fp) {
